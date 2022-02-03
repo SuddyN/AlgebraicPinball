@@ -27,7 +27,7 @@ public class PinballGame : MonoBehaviour
     public KeyCode puzzlecameraKey;
 
 
-    private int ballsLeft = 3;
+    public int ballsLeft = 3;
     private bool gameOver = false;
     private GameObject ball;
     private GameObject plunger;
@@ -122,6 +122,12 @@ public class PinballGame : MonoBehaviour
             bumper.GetComponent<MeshRenderer>().enabled = true;
             bumper.GetComponent<BoxCollider>().enabled = true;
             bumper.GetComponent<BumperController>().hitCount = 0;
+        }
+
+        GameObject[] powerups;
+        powerups = GameObject.FindGameObjectsWithTag("Powerup");
+        foreach (GameObject powerup in powerups) {
+            powerup.GetComponent<PowerupController>().ResetPowerup();
         }
     }
 

@@ -6,11 +6,11 @@ public class PowerupController : MonoBehaviour
 {
 
     public enum PowerUpType {
-        DoubleScore, AddBall, Slowdown
+        DoubleScore, AddLife
     }
 
     public int deleteAfterHits;
-    private int hitCount = 0;
+    public int hitCount = 0;
     public PowerUpType powerupType;
     private GameObject pinballTable;
     private PinballGame pinballGame;
@@ -19,7 +19,7 @@ public class PowerupController : MonoBehaviour
     void Start()
     {
         pinballTable = GameObject.Find("Pinball Table");
-        pinballGame = pinballTable?.GetComponent<PinballGame>();
+        pinballGame = pinballTable.GetComponent<PinballGame>();
         if (hitCount >= deleteAfterHits) {
             DeletePowerup();
         }
@@ -36,10 +36,8 @@ public class PowerupController : MonoBehaviour
             hitCount++;
             if (powerupType == PowerUpType.DoubleScore)
                 DoubleScore();
-            if (powerupType == PowerUpType.AddBall)
-                AddBall();
-            if (powerupType == PowerUpType.Slowdown)
-                Slowdown();
+            else if (powerupType == PowerUpType.AddLife)
+                AddLife();
             if (hitCount >= deleteAfterHits) {
                 DeletePowerup();
             }
@@ -47,20 +45,22 @@ public class PowerupController : MonoBehaviour
     }
 
     private void DoubleScore() {
-        pinballGame.score = pinballGame.score * 2;
+        pinballGame.score *= 2;
     }
 
-    private void AddBall() {
-        
+    private void AddLife() {
+        pinballGame.ballsLeft++;
     }
 
-    private void Slowdown() {
-    
-    }
-
-    private void DeletePowerup() {
+    public void DeletePowerup() {
         // Don't display or collide with this object
         this.gameObject.GetComponent<MeshRenderer>().enabled = false;
         this.gameObject.GetComponent<BoxCollider>().enabled = false;
+    }
+
+    public void ResetPowerup() {
+        this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        this.gameObject.GetComponent<BoxCollider>().enabled = true;
+        hitCount = 0;
     }
 }
