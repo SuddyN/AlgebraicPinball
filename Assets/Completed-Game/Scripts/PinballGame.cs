@@ -11,6 +11,9 @@ public class PinballGame : MonoBehaviour
     public Text winText;
     public Text ballsText;
 
+    [SerializeField] private QuestionDisplay questionDisplay;
+    public QuestionData testQuestion; // TODO: Remove
+
     public int maxBalls = 3;
     public int score = 0;
     private int highscore = 0;
@@ -26,6 +29,7 @@ public class PinballGame : MonoBehaviour
     public KeyCode plungerKey;
     public KeyCode puzzlecameraKey;
 
+    public KeyCode askQuestionKey; // TODO: Remove
 
     public int ballsLeft = 3;
     private bool gameOver = false;
@@ -64,6 +68,7 @@ public class PinballGame : MonoBehaviour
         if (Input.GetKey(newGameKey) == true) NewGame();
         if (Input.GetKey(plungerKey) == true) Plunger();
         if (Input.GetKey(puzzlecameraKey) == true) switchCamera();
+        if (Input.GetKey(askQuestionKey) == true) AskQuestion(testQuestion); // TODO: Remove
 
         // detect ball going past flippers into "drain"
         if ((ball.activeSelf == true) && (ball.transform.position.z < drain.transform.position.z))
@@ -152,6 +157,11 @@ public class PinballGame : MonoBehaviour
 
             audioPlayer.PlayOneShot(plungerClip);
         }
+    }
+
+    public void AskQuestion(QuestionData question)
+    {
+        questionDisplay.Display(question);
     }
 
     void switchCamera()
