@@ -41,6 +41,15 @@ public class QuestionData : ScriptableObject
     public bool IsMultiselect => isMultiselect;
     public ResponseOption[] Choices => choices;
     public int AllowedAttempts => allowedAttempts;
+
+    public static QuestionData Create(string questionText, bool multiselect, ResponseOption[] options)
+    {
+        QuestionData result = ScriptableObject.CreateInstance<QuestionData>();
+        result.question = questionText;
+        result.isMultiselect = multiselect;
+        result.choices = options;
+        return result;
+    }
     
     private SubmissionResult EvaluateSelection(bool[] selection)
     {
