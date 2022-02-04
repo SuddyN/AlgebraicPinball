@@ -71,6 +71,11 @@ public class PinballGame : MonoBehaviour
             ball.SetActive(false);
         }
 
+        if (ball.transform.position.y > 2)
+        {
+            ball.transform.position = new Vector3(0, -1, 0);
+        }
+
         if ((ball.activeSelf == false) && (ballsLeft == 0))
         {
             if (gameOver == false)
