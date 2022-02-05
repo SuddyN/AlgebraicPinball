@@ -1563,7 +1563,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.35
+  m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3029,37 +3029,37 @@ PrefabInstance:
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.84462327
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.46193978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.19134173
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.19134173
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 740a8dc6c20aadd46b3cd77b7d118fe1, type: 3}
@@ -3466,37 +3466,37 @@ PrefabInstance:
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.84462327
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.46193978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.19134173
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.19134173
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 855346482822746737, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 740a8dc6c20aadd46b3cd77b7d118fe1, type: 3}
@@ -5650,7 +5650,7 @@ MonoBehaviour:
   plungerSpeed: 5000
   audioPlayer: {fileID: 1981852150}
   plungerClip: {fileID: 8300000, guid: 968ad320b1076364ab873acb055ac10a, type: 3}
-  soundtrackClip: {fileID: 8300000, guid: 35ca471ea0c7ec346b9e45ba6e981738, type: 3}
+  soundtrackClip: {fileID: 0}
   gameoverClip: {fileID: 8300000, guid: a633b5e62a403834aa69253529790c02, type: 3}
   newGameKey: 110
   plungerKey: 112

@@ -137,7 +137,7 @@ public class PinballGame : MonoBehaviour
         GameObject[] powerups;
         powerups = GameObject.FindGameObjectsWithTag("Powerup");
         foreach (GameObject powerup in powerups) {
-            powerup.GetComponent<PowerupController>().ResetPowerup();
+            powerup.GetComponent<PowerupProvider>().Reset();
         }
     }
 

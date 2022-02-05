@@ -53,16 +53,20 @@ public class QuestionDisplay : MonoBehaviour
         }
         
         latestSubmissionResult = currentQuestion.SubmitSelection(selection);
-        Debug.Log(latestSubmissionResult);
+        
+        DisplaySubmissionStatus();
         
         remainingAttempts--;
         UpdateRemainingCount();
         
         if (remainingAttempts < 1 || latestSubmissionResult == SubmissionResult.Correct)
         {
-            // Finish the problem display
-            currentQuestion.FinishProblem(latestSubmissionResult);
-            Clear();
+            Utility.DelayedFunction(this, 3, () =>
+            {
+                // Finish the problem display after a 3 second wait
+                currentQuestion.FinishProblem(latestSubmissionResult);
+                Clear();
+            });
         }
         else
         {
@@ -82,12 +86,24 @@ public class QuestionDisplay : MonoBehaviour
         }
         retryButton.SetActive(false);
         submitButton.SetActive(true);
+        HideSubmissionStatus();
     }
 
     public void Skip()
     {
         currentQuestion.FinishProblem(SubmissionResult.Skipped);
         Clear();
+    }
+
+    private void DisplaySubmissionStatus()
+    {
+        // TODO: Enable status display, hide questions
+    }
+    
+    
+    private void HideSubmissionStatus()
+    {
+        // TODO: Disable status display, show questions
     }
 
     private void UpdateRemainingCount()
@@ -99,6 +115,8 @@ public class QuestionDisplay : MonoBehaviour
     {
         currentQuestion = null;
         latestSubmissionResult = SubmissionResult.None;
+        
+        // TODO: Hide submission status message
 
         foreach (var option in options)
         {

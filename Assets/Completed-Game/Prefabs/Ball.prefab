@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1904840456745669058}
+  - component: {fileID: 532105929893304734}
+  - component: {fileID: 6673521852734223320}
   - component: {fileID: 1904840456745669061}
   - component: {fileID: 1904840456745669060}
   - component: {fileID: 1904840456745669063}
   - component: {fileID: 1904840456745669056}
-  - component: {fileID: 6673521852734223320}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -35,6 +36,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &532105929893304734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904840456745669062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6089f0b755bc053469fa5ac6446871db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6673521852734223320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904840456745669062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c13fc79304b83374a97abec374d2fbde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  audioPlayer: {fileID: 0}
+  bounceClip: {fileID: 0}
 --- !u!33 &1904840456745669061
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -70,6 +98,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -94,6 +124,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!54 &1904840456745669056
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -110,16 +141,3 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &6673521852734223320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1904840456745669062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c13fc79304b83374a97abec374d2fbde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
