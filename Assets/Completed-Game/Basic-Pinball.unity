@@ -2998,6 +2998,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 849497014807995829, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
         type: 3}
+      propertyPath: powerup
+      value: 
+      objectReference: {fileID: 11400000, guid: 1dba59e416df1da44848a9e631039ad4,
+        type: 2}
+    - target: {fileID: 849497014807995829, guid: 740a8dc6c20aadd46b3cd77b7d118fe1,
+        type: 3}
       propertyPath: powerupType
       value: 0
       objectReference: {fileID: 0}
@@ -6217,3 +6223,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 151f3503fee8dda46b8c22322ab3b3f8, type: 3}
+--- !u!1001 &8423252459766105102
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3867967005823051670, guid: 255cea05a73da7945aa3fe2d83523ecb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867967005823051670, guid: 255cea05a73da7945aa3fe2d83523ecb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867967005823051670, guid: 255cea05a73da7945aa3fe2d83523ecb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867967005823051670, guid: 255cea05a73da7945aa3fe2d83523ecb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867967005823051670, guid: 255cea05a73da7945aa3fe2d83523ecb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867967005823051670, guid: 255cea05a73da7945aa3fe2d83523ecb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867967005823051670, guid: 255cea05a73da7945aa3fe2d83523ecb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867967005823051670, guid: 255cea05a73da7945aa3fe2d83523ecb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867967005823051670, guid: 255cea05a73da7945aa3fe2d83523ecb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867967005823051670, guid: 255cea05a73da7945aa3fe2d83523ecb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867967005823051670, guid: 255cea05a73da7945aa3fe2d83523ecb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616333533051479407, guid: 255cea05a73da7945aa3fe2d83523ecb,
+        type: 3}
+      propertyPath: m_Name
+      value: '[PowerupManager]'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 255cea05a73da7945aa3fe2d83523ecb, type: 3}
