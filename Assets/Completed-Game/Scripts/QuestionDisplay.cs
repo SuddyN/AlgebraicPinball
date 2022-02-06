@@ -49,10 +49,15 @@ public class QuestionDisplay : MonoBehaviour
         for (int i = 0; i < selection.Length; i++)
         {
             selection[i] = options[i].IsSelected();
-            options[i].Hide();
+            options[i].Disable();
         }
         
-        latestSubmissionResult = currentQuestion.SubmitSelection(selection);
+        latestSubmissionResult = currentQuestion.SubmitSelection(selection, out bool[] correctResponses);
+
+        for (int i = 0; i < correctResponses.Length; i++)
+        {
+            if (selection[i]) options[i].ShowResultSprite(correctResponses[i]);
+        }
         
         DisplaySubmissionStatus();
         
@@ -61,7 +66,7 @@ public class QuestionDisplay : MonoBehaviour
         
         if (remainingAttempts < 1 || latestSubmissionResult == SubmissionResult.Correct)
         {
-            Utility.DelayedFunction(this, 3, () =>
+            Utility.DelayedFunction(this, 2, () =>
             {
                 // Finish the problem display after a 3 second wait
                 currentQuestion.FinishProblem(latestSubmissionResult);
@@ -82,7 +87,7 @@ public class QuestionDisplay : MonoBehaviour
         foreach (var option in options)
         {
             option.Reset();
-            option.Show();
+            option.Enable();
         }
         retryButton.SetActive(false);
         submitButton.SetActive(true);

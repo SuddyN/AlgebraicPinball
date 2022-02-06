@@ -9,30 +9,30 @@ public class BumperScript : MonoBehaviour
     public AudioSource bumperSound;
     public Material bumperOff;
     public Material bumperOn;
-    MeshRenderer renderer;
+    private MeshRenderer meshRenderer;
     public float bumperForce;
     bool bHitLight = false;
     float hitLightTimer = 0;
     public Light light;
 
     private void Start() {
-        renderer = gameObject.GetComponent<MeshRenderer>();
+        meshRenderer = gameObject.GetComponent<MeshRenderer>();
         bumperSound = GetComponent<AudioSource>();
     }
 
     private void Update() {
         // assign material depending on whether bumper hit or not
-        Material[] materials = renderer.materials;
-        if ((bHitLight) && (hitLightTimer < 5)) {
-            materials[0] = bumperOn;
-            hitLightTimer = hitLightTimer + 1;
+        Material[] materials = meshRenderer.materials;
+        if ((bHitLight) && (hitLightTimer < 500)) {
+            materials[2] = bumperOn;
+            hitLightTimer++;
             light.intensity = 1.5f;
         } else {
-            materials[0] = bumperOff;
+            materials[2] = bumperOff;
             bHitLight = false;
             light.intensity = 0.25f;
         };
-        renderer.materials = materials;
+        meshRenderer.materials = materials;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -44,6 +44,6 @@ public class BumperScript : MonoBehaviour
         Vector3 diff = collision.gameObject.transform.position - this.gameObject.transform.position;
         diff.y = 0;
         collision.gameObject.GetComponent<Rigidbody>().AddForce(diff.normalized * bumperForce);
-        GameObject.Find("Pinball Table").GetComponent<PinballGame>().score = GameObject.Find("Pinball Table").GetComponent<PinballGame>().score + scoreIncrement;
+        PinballGame.Get().AddScore(scoreIncrement);
     }
 }

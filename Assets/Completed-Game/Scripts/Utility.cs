@@ -40,10 +40,13 @@ public static class Utility
      * <param name="context">The monobehaviour context used to execute the action.</param>
      * <param name="seconds">The number of seconds to wait before performing the action.</param>
      * <param name="action">The action to perform.</param>
+     * <returns>The coroutine enumerator.</returns>
      */
-    public static void DelayedFunction(MonoBehaviour context, float seconds, Action action)
+    public static IEnumerator DelayedFunction(MonoBehaviour context, float seconds, Action action)
     {
-        context.StartCoroutine(DelayedFunctionImplementation(seconds, action));
+        IEnumerator coroutine = DelayedFunctionImplementation(seconds, action);
+        context.StartCoroutine(coroutine);
+        return coroutine;
     }
 
     /**

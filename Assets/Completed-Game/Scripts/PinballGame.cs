@@ -14,8 +14,11 @@ public class PinballGame : MonoBehaviour
     [SerializeField] private QuestionDisplay questionDisplay;
     public QuestionData testQuestion; // TODO: Remove
 
-    public int maxBalls = 3;
-    public int score = 0;
+    [SerializeField] private int maxBalls = 3;
+    [SerializeField] private int score = 0;
+
+    private float addPointsMultiplier = 1.0f;
+    
     private int highscore = 0;
 
     public float plungerSpeed = 100;
@@ -27,7 +30,6 @@ public class PinballGame : MonoBehaviour
 
     public KeyCode newGameKey;
     public KeyCode plungerKey;
-    public KeyCode puzzlecameraKey;
 
     public KeyCode askQuestionKey; // TODO: Remove
 
@@ -37,20 +39,29 @@ public class PinballGame : MonoBehaviour
     private GameObject plunger;
     private GameObject drain;
 
-    private GameObject maincam;
-    private GameObject puzzleCamera;
+    private static PinballGame instance;
 
-    // At the start of the game..
+    protected void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+    public static PinballGame Get() => instance;
+
+    
     void Start()
     {
         plunger = GameObject.Find("Plunger");
         drain = GameObject.Find("Drain");
         ball = GameObject.Find("Ball");
-        maincam = GameObject.FindGameObjectWithTag("MainCamera");
-        puzzleCamera = GameObject.Find("PuzzleCamera");
-
-
-        puzzleCamera.SetActive(false);
 
         ball.SetActive(false);
 
@@ -67,7 +78,6 @@ public class PinballGame : MonoBehaviour
 
         if (Input.GetKey(newGameKey) == true) NewGame();
         if (Input.GetKey(plungerKey) == true) Plunger();
-        if (Input.GetKey(puzzlecameraKey) == true) switchCamera();
         if (Input.GetKey(askQuestionKey) == true) AskQuestion(testQuestion); // TODO: Remove
 
         // detect ball going past flippers into "drain"
@@ -122,7 +132,7 @@ public class PinballGame : MonoBehaviour
         ballsLeft = 3;
         gameOver = false;
         ball.SetActive(false);
-        score = 0;
+        ResetScore();
 
         GameObject[] bumpers;
         bumpers = GameObject.FindGameObjectsWithTag("Bumper");
@@ -131,7 +141,6 @@ public class PinballGame : MonoBehaviour
         {
             bumper.GetComponent<MeshRenderer>().enabled = true;
             bumper.GetComponent<BoxCollider>().enabled = true;
-            bumper.GetComponent<BumperController>().hitCount = 0;
         }
 
         GameObject[] powerups;
@@ -148,6 +157,7 @@ public class PinballGame : MonoBehaviour
             ball.SetActive(true);
 
             Rigidbody rb = ball.GetComponent<Rigidbody>();
+            rb.velocity = Vector3.zero;
             Vector3 movement = new Vector3(0.0f, 0.0f, 1.0f);
             rb.AddForce(movement * plungerSpeed);
 
@@ -164,21 +174,33 @@ public class PinballGame : MonoBehaviour
         questionDisplay.Display(question);
     }
 
-    void switchCamera()
+    public void AddScore(int points)
     {
-
-        if (maincam.activeSelf == true)
-        {
-            maincam.SetActive(false);
-            puzzleCamera.SetActive(true);
-        }
-        else
-        {
-            puzzleCamera.SetActive(false);
-            maincam.SetActive(true);
-
-        }
+        score += (int)(points * addPointsMultiplier);
     }
+
+    public void MultiplyScore(float multiplier)
+    {
+        score = (int)(multiplier * score);
+    }
+
+    public void SetPointsMultiplier(float multiplier)
+    {
+        addPointsMultiplier = multiplier;
+    }
+
+    public int Score => score;
+
+    public void ResetScore()
+    {
+        score = 0;
+    }
+
+    public void AddLife()
+    {
+        ballsLeft += ballsLeft < maxBalls ? 1 : 0;
+    }
+
 }
 
 

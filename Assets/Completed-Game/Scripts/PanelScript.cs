@@ -4,37 +4,56 @@ using UnityEngine;
 
 public class PanelScript : MonoBehaviour
 {
-    int triggered = 0;
-    public Light light;
-    public int lightupTimer = 500;
+    private bool triggered = false;
+    [SerializeField] private Light light;
+    [SerializeField] private float lightupDuration = 10;
 
-    // Start is called before the first frame update
+    private Material material;
+    private IEnumerator lightCoroutine;
+
+    public bool IsActive => triggered;
+
     void Start()
     {
-        gameObject.GetComponent<Renderer>().material.color = Color.white;
+        material = gameObject.GetComponent<Renderer>().material;
+        Reset();
     }
 
-    void Update()
+    public void Reset()
     {
-        if (triggered != 0)
+        material.color = Color.white;
+        triggered = false;
+        light.intensity = 0;
+        if (lightCoroutine != null)
         {
-            triggered--;
-        } else
-        {
-            gameObject.GetComponent<Renderer>().material.color = Color.white;
-            light.intensity = 1;
+            StopCoroutine(lightCoroutine);
+            lightCoroutine = null;
         }
     }
 
     // Update is called once per frame
     void OnTriggerEnter(Collider collider)
     {
-        if (triggered == 0)
+        if (!triggered)
         {
-            triggered = lightupTimer;
-            gameObject.GetComponent<Renderer>().material.color = Color.green;
-            light.intensity = 2;
-            GameObject.Find("Pinball Table").GetComponent<PinballGame>().score = GameObject.Find("Pinball Table").GetComponent<PinballGame>().score + 10;
+            Activate();
+            PinballGame.Get().AddScore(10);
         }
+    }
+
+    private void Activate()
+    {
+        material.color = Color.green;
+        triggered = true;
+        light.intensity = 2;
+        lightCoroutine = Utility.DelayedFunction(this, lightupDuration, Deactivate);
+    }
+
+    private void Deactivate()
+    {
+        material.color = Color.white;
+        triggered = false;
+        light.intensity = 0;
+        lightCoroutine = null;
     }
 }

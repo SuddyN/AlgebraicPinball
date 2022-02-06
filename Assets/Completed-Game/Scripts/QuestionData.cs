@@ -51,13 +51,16 @@ public class QuestionData : ScriptableObject
         return result;
     }
     
-    private SubmissionResult EvaluateSelection(bool[] selection)
+    private SubmissionResult EvaluateSelection(bool[] selection, out bool[] correctResponses)
     {
         bool correct = true;
         bool isPartial = false;
+
+        correctResponses = new bool[selection.Length];
         
         for (int i = 0; i < selection.Length; i++)
         {
+            correctResponses[i] = choices[i].correct;
             correct &= selection[i] == choices[i].correct; // Incorrect choice
             isPartial |= selection[i] && choices[i].correct; // Has at least a partially correct answer
         }
@@ -65,10 +68,12 @@ public class QuestionData : ScriptableObject
         return correct ? SubmissionResult.Correct : (isPartial ? SubmissionResult.Partial : SubmissionResult.Incorrect);
     }
 
-    public SubmissionResult SubmitSelection(bool[] selection)
+    public SubmissionResult SubmitSelection(bool[] selection, out bool[] correctResponses)
     {
         // TODO: Record answer statistics here as stretch goal
-        return EvaluateSelection(selection);
+        SubmissionResult result = EvaluateSelection(selection, out bool[] correct);
+        correctResponses = correct;
+        return result;
     }
 
     public void FinishProblem(SubmissionResult submission)
