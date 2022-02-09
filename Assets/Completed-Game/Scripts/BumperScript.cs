@@ -5,45 +5,61 @@ using UnityEngine;
 public class BumperScript : MonoBehaviour
 {
 
-    public int scoreIncrement = 100;
-    public AudioSource bumperSound;
-    public Material bumperOff;
-    public Material bumperOn;
-    private MeshRenderer meshRenderer;
-    public float bumperForce;
-    bool bHitLight = false;
-    float hitLightTimer = 0;
-    public Light light;
+    [SerializeField] private int scoreIncrement = 100;
+    [SerializeField] private AudioSource bumperSound;
+    [SerializeField] private Material bumperOff;
+    [SerializeField] private Material bumperOn;
+    [SerializeField] private float bumperForce;
+    [SerializeField] private float hitLightTime = 1.0f;
+    
+    [SerializeField] private Light bumperLight;
+    
+    private static int lightMaterialSlot = 2;
+    
+    private MeshRenderer _meshRenderer = null;
+    private bool _isHit = false;
+    private IEnumerator _lightCoroutine = null;
 
     private void Start() {
-        meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        _meshRenderer = gameObject.GetComponent<MeshRenderer>();
         bumperSound = GetComponent<AudioSource>();
-    }
-
-    private void Update() {
-        // assign material depending on whether bumper hit or not
-        Material[] materials = meshRenderer.materials;
-        if ((bHitLight) && (hitLightTimer < 500)) {
-            materials[2] = bumperOn;
-            hitLightTimer++;
-            light.intensity = 1.5f;
-        } else {
-            materials[2] = bumperOff;
-            bHitLight = false;
-            light.intensity = 0.25f;
-        };
-        meshRenderer.materials = materials;
     }
 
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Bumper Hit");
-        //trigger hit light (change material assigned to bumper object, so bumper "lights up"), reset hitlight timer 
-        bHitLight = true;
-        hitLightTimer = 0;
+        //trigger hit light or reset hit light timer 
+        if (_isHit) ResetLightTimer();
+        else ActivateLight();
+        
+        // Bounce the ball
         Vector3 diff = collision.gameObject.transform.position - this.gameObject.transform.position;
         diff.y = 0;
         collision.gameObject.GetComponent<Rigidbody>().AddForce(diff.normalized * bumperForce);
         PinballGame.Get().AddScore(scoreIncrement);
+    }
+
+    private void ActivateLight()
+    {
+        Material[] materials = _meshRenderer.materials;
+        materials[lightMaterialSlot] = bumperOn;
+        bumperLight.intensity = 1.5f;
+        _meshRenderer.materials = materials;
+        _lightCoroutine = Utility.DelayedFunction(this, hitLightTime, DeactivateLight);
+    }
+
+    private void ResetLightTimer()
+    {
+        StopCoroutine(_lightCoroutine);
+        _lightCoroutine = Utility.DelayedFunction(this, hitLightTime, DeactivateLight);
+    }
+
+    private void DeactivateLight()
+    {
+        Material[] materials = _meshRenderer.materials;
+        materials[lightMaterialSlot] = bumperOff;
+        bumperLight.intensity = 0.0f;
+        _meshRenderer.materials = materials;
+        _lightCoroutine = null;
     }
 }
