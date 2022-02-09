@@ -8,11 +8,15 @@ public class QuestionResponse : MonoBehaviour
     [SerializeField] private Text label;
     [SerializeField] private Toggle toggle;
     [SerializeField] private Image background;
+
+    private bool isMultiselect;
     
     [SerializeField] private Graphic singleSelectIcon;
     [SerializeField] private Graphic multiSelectIcon;
-    [SerializeField] private Sprite singleSelectBackground;
-    [SerializeField] private Sprite multiSelectBackground;
+    
+    [SerializeField] private Image resultSprite;
+    [SerializeField] private Sprite correctSprite;
+    [SerializeField] private Sprite incorrectSprite;
 
     public bool IsSelected() => toggle.isOn;
     
@@ -20,35 +24,41 @@ public class QuestionResponse : MonoBehaviour
     {
         label.text = value;
         toggle.group = toggleGroup;
-        singleSelectIcon.gameObject.SetActive(toggleGroup != null);
-        multiSelectIcon.gameObject.SetActive(toggleGroup == null);
+        isMultiselect = toggleGroup == null;
+        singleSelectIcon.gameObject.SetActive(!isMultiselect);
+        multiSelectIcon.gameObject.SetActive(isMultiselect);
 
         toggle.isOn = false;
         
-        if (toggleGroup == null)
-        {
-            toggle.graphic = multiSelectIcon;
-            background.sprite = multiSelectBackground;
-        }
-        else
-        {
-            toggle.graphic = singleSelectIcon;
-            background.sprite = singleSelectBackground;
-        }
+        toggle.graphic = isMultiselect ? multiSelectIcon : singleSelectIcon;
     }
 
-    public void Hide()
+    public void Disable()
     {
-        gameObject.SetActive(false);
+        toggle.interactable = false;
     }
 
-    public void Show()
+    public void Enable()
     {
-        gameObject.SetActive(true);
+        toggle.interactable = true;
     }
 
     public void Reset()
     {
         toggle.isOn = false;
+        HideResultSprite();
+    }
+
+    public void ShowResultSprite(bool wasCorrect)
+    {
+        toggle.isOn = false;
+        resultSprite.sprite = wasCorrect ? correctSprite : incorrectSprite;
+        resultSprite.color = wasCorrect ? new Color(0.4f, 0.8f, 0.4f) : new Color(0.8f, 0.4f, 0.4f);
+        resultSprite.gameObject.SetActive(true);
+    }
+
+    public void HideResultSprite()
+    {
+        resultSprite.gameObject.SetActive(false);
     }
 }
