@@ -46,6 +46,7 @@ public class BumperScript : MonoBehaviour
         bumperLight.intensity = 1.5f;
         _meshRenderer.materials = materials;
         _lightCoroutine = Utility.DelayedFunction(this, hitLightTime, DeactivateLight);
+        _isHit = true;
     }
 
     private void ResetLightTimer()
@@ -61,5 +62,6 @@ public class BumperScript : MonoBehaviour
         bumperLight.intensity = 0.0f;
         _meshRenderer.materials = materials;
         _lightCoroutine = null;
+        _isHit = false;
     }
 }
