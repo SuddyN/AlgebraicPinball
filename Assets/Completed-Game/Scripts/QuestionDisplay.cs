@@ -20,6 +20,15 @@ public class QuestionDisplay : MonoBehaviour
     private SubmissionResult latestSubmissionResult = SubmissionResult.None;
     private List<QuestionResponse> options = new List<QuestionResponse>();
 
+    [SerializeField] private GameObject pinballTable;
+
+    [SerializeField] private AudioSource audioData;
+
+    void Start() 
+    {
+        //audioData = GetComponent<AudioSource>();
+    }
+
     public void Display(QuestionData question)
     {
 
@@ -41,6 +50,7 @@ public class QuestionDisplay : MonoBehaviour
         UpdateRemainingCount();
         
         gameObject.SetActive(true);
+        audioData.Play(0);
     }
 
     public void Submit()
@@ -60,7 +70,7 @@ public class QuestionDisplay : MonoBehaviour
         }
         
         DisplaySubmissionStatus();
-        
+
         remainingAttempts--;
         UpdateRemainingCount();
         
@@ -69,6 +79,7 @@ public class QuestionDisplay : MonoBehaviour
             Utility.DelayedFunction(this, 2, () =>
             {
                 // Finish the problem display after a 3 second wait
+                if (latestSubmissionResult == SubmissionResult.Correct) pinballTable.GetComponent<PinballGame>().ballsLeft++;                
                 currentQuestion.FinishProblem(latestSubmissionResult);
                 Clear();
             });

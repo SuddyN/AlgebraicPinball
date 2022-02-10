@@ -13,9 +13,12 @@ public class PanelScript : MonoBehaviour
 
     public bool IsActive => triggered;
 
+    AudioSource audioData;
+
     void Start()
     {
         material = gameObject.GetComponent<Renderer>().material;
+        audioData = GetComponent<AudioSource>();
         Reset();
     }
 
@@ -47,6 +50,8 @@ public class PanelScript : MonoBehaviour
         triggered = true;
         light.intensity = 2;
         lightCoroutine = Utility.DelayedFunction(this, lightupDuration, Deactivate);
+        audioData.Play(0);
+
     }
 
     private void Deactivate()
