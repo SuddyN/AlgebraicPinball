@@ -12,7 +12,41 @@ public class PinballGame : MonoBehaviour
     public Text ballsText;
 
     [SerializeField] private QuestionDisplay questionDisplay;
-    public QuestionData testQuestion; // TODO: Remove
+    public QuestionData Level1Question1; // TODO: Remove
+    public QuestionData Level1Question2; // TODO: Remove
+    public QuestionData Level1Question3; // TODO: Remove
+    public QuestionData Level1Question4; // TODO: Remove
+    public QuestionData Level1Question5; // TODO: Remove
+    public QuestionData Level2Question1; // TODO: Remove
+    public QuestionData Level2Question2; // TODO: Remove
+    public QuestionData Level2Question3; // TODO: Remove
+    public QuestionData Level2Question4; // TODO: Remove
+    public QuestionData Level2Question5; // TODO: Remove
+    public QuestionData Level3Question1; // TODO: Remove
+    public QuestionData Level3Question2; // TODO: Remove
+    public QuestionData Level3Question3; // TODO: Remove
+    public QuestionData Level3Question4; // TODO: Remove
+    public QuestionData Level3Question5; // TODO: Remove
+    public QuestionData Level4Question1; // TODO: Remove
+    public QuestionData Level4Question2; // TODO: Remove
+    public QuestionData Level4Question3; // TODO: Remove
+    public QuestionData Level4Question4; // TODO: Remove
+    public QuestionData Level4Question5; // TODO: Remove
+    public QuestionData Level5Question1; // TODO: Remove
+    public QuestionData Level5Question2; // TODO: Remove
+    public QuestionData Level5Question3; // TODO: Remove
+    public QuestionData Level5Question4; // TODO: Remove
+    public QuestionData Level5Question5; // TODO: Remove
+    public QuestionData Level6Question1; // TODO: Remove
+    public QuestionData Level6Question2; // TODO: Remove
+    public QuestionData Level6Question3; // TODO: Remove
+    public QuestionData Level6Question4; // TODO: Remove
+    public QuestionData Level6Question5; // TODO: Remove
+    public QuestionData Level7Question1; // TODO: Remove
+    public QuestionData Level7Question2; // TODO: Remove
+    public QuestionData Level7Question3; // TODO: Remove
+    public QuestionData Level7Question4; // TODO: Remove
+    public QuestionData Level7Question5; // TODO: Remove
 
     [SerializeField] private int maxBalls = 3;
     [SerializeField] private int score = 0;
@@ -40,6 +74,8 @@ public class PinballGame : MonoBehaviour
     private GameObject drain;
 
     private static PinballGame instance;
+
+    private int level = 1;
 
     protected void Awake()
     {
@@ -78,12 +114,98 @@ public class PinballGame : MonoBehaviour
 
         if (Input.GetKey(newGameKey) == true) NewGame();
         if (Input.GetKey(plungerKey) == true) Plunger();
-        if (Input.GetKey(askQuestionKey) == true) AskQuestion(testQuestion); // TODO: Remove
 
         // detect ball going past flippers into "drain"
         if ((ball.activeSelf == true) && (ball.transform.position.z < drain.transform.position.z))
         {
             ball.SetActive(false);
+            int rand = Random.Range(1, 5);
+            if (level == 1) {
+                if (rand == 1) {
+                    AskQuestion(Level1Question1);
+                } else if (rand == 2) {
+                    AskQuestion(Level1Question2);
+                } else if (rand == 3) {
+                    AskQuestion(Level1Question3);
+                } else if (rand == 4) {
+                    AskQuestion(Level1Question4);
+                } else if (rand == 5) {
+                    AskQuestion(Level1Question5);
+                } 
+            } else if (level == 2) {
+                if (rand == 1) {
+                    AskQuestion(Level2Question1);
+                } else if (rand == 2) {
+                    AskQuestion(Level2Question2);
+                } else if (rand == 3) {
+                    AskQuestion(Level2Question3);
+                } else if (rand == 4) {
+                    AskQuestion(Level2Question4);
+                } else if (rand == 5) {
+                    AskQuestion(Level2Question5);
+                } 
+            } else if (level == 3) {
+                if (rand == 1) {
+                    AskQuestion(Level3Question1);
+                } else if (rand == 2) {
+                    AskQuestion(Level3Question2);
+                } else if (rand == 3) {
+                    AskQuestion(Level3Question3);
+                } else if (rand == 4) {
+                    AskQuestion(Level3Question4);
+                } else if (rand == 5) {
+                    AskQuestion(Level3Question5);
+                } 
+            } else if (level == 4) {
+                if (rand == 1) {
+                    AskQuestion(Level4Question1);
+                } else if (rand == 2) {
+                    AskQuestion(Level4Question2);
+                } else if (rand == 3) {
+                    AskQuestion(Level4Question3);
+                } else if (rand == 4) {
+                    AskQuestion(Level4Question4);
+                } else if (rand == 5) {
+                    AskQuestion(Level4Question5);
+                } 
+            } else if (level == 5) {
+                if (rand == 1) {
+                    AskQuestion(Level5Question1);
+                } else if (rand == 2) {
+                    AskQuestion(Level5Question2);
+                } else if (rand == 3) {
+                    AskQuestion(Level5Question3);
+                } else if (rand == 4) {
+                    AskQuestion(Level5Question4);
+                } else if (rand == 5) {
+                    AskQuestion(Level5Question5);
+                } 
+            } else if (level == 6) {
+                if (rand == 1) {
+                    AskQuestion(Level6Question1);
+                } else if (rand == 2) {
+                    AskQuestion(Level6Question2);
+                } else if (rand == 3) {
+                    AskQuestion(Level6Question3);
+                } else if (rand == 4) {
+                    AskQuestion(Level6Question4);
+                } else if (rand == 5) {
+                    AskQuestion(Level6Question5);
+                } 
+            } else if (level >= 7) {
+                if (rand == 1) {
+                    AskQuestion(Level7Question1);
+                } else if (rand == 2) {
+                    AskQuestion(Level7Question2);
+                } else if (rand == 3) {
+                    AskQuestion(Level7Question3);
+                } else if (rand == 4) {
+                    AskQuestion(Level7Question4);
+                } else if (rand == 5) {
+                    AskQuestion(Level7Question5);
+                } 
+            }
+            level++;
         }
 
         if (ball.transform.position.y > 2)
@@ -119,8 +241,8 @@ public class PinballGame : MonoBehaviour
 
         // Check if our 'count' is equal to or exceeded 12
         if (gameOver) winText.text = "Game Over";
-        else if (score == 1500) winText.text = "Superstar!";
-        else if (score >= 2100) winText.text = "You won!";
+        else if (score == 5000) winText.text = "Superstar!";
+        else if (score >= 100000) winText.text = "You won!";
         else winText.text = "";
 
         if (score > highscore) highscore = score;
